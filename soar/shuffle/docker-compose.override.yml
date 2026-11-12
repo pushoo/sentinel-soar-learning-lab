@@ -1,0 +1,7 @@
+# Learning lab: memory caps for Shuffle's upstream docker-compose.yml.
+# Copied next to upstream's compose file by soar/install-shuffle.sh; compose merges it automatically.
+services:
+  opensearch:
+    environment:
+      - OPENSEARCH_JAVA_OPTS=-Xms1g -Xmx1g
+    mem_limit: 2g
