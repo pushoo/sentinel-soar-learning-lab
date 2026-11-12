@@ -1,4 +1,4 @@
-# Step 6 — Dry run, recording checklist and cleanup
+# Step 6: Dry run, recording checklist and cleanup
 
 > Learning lab.
 
@@ -9,7 +9,7 @@
 - [ ] Use case 1: one incident (Medium → High after the playbook) with Account and IP entities
 - [ ] Use case 2: six incidents, severities match the list `make_pii_findings.py` printed
 - [ ] Playbooks ran: tags, comments, Teams/email message
-- [ ] Shuffle created one TheHive case per incident within 1–2 minutes, with observables
+- [ ] Shuffle created one TheHive case per incident within 1-2 minutes, with observables
 - [ ] Sentinel incidents show "Case #N opened" and status Active
 - [ ] Closing a TheHive case closes the Sentinel incident with the right classification
 - [ ] Re-running Workflow 1 does not create duplicate cases
@@ -20,7 +20,7 @@ Reset for a new take: close the lab incidents, then regenerate the CSVs so the t
 ## Recording checklist
 
 - [ ] Lab tenant only; blur subscription ID, tenant ID, client IDs, secrets, API keys and email addresses
-- [ ] 1920×1080, browser zoom 110–125%, dark mode, terminal font 16pt+
+- [ ] 1920×1080, browser zoom 110-125%, dark mode, terminal font 16pt+
 - [ ] Say "learning lab, synthetic data" in the first minute and show it on screen
 - [ ] Add a clock overlay when you cut waits (rule schedule, ingestion delay)
 - [ ] Upload your own captions so Sentinel, SOAR, Entra, Shuffle and TheHive are spelled correctly

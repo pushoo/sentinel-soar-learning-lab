@@ -1,4 +1,4 @@
-# Step 3 — Detections (analytics rules)
+# Step 3: Detections (analytics rules)
 
 > Learning lab.
 

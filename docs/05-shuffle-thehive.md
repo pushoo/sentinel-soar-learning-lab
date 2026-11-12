@@ -1,4 +1,4 @@
-# Step 5 — Shuffle + TheHive
+# Step 5: Shuffle + TheHive
 
 > Learning lab. Lock both web UIs to your own IP. Never expose them to the internet with default credentials.
 
@@ -20,7 +20,7 @@ bash soar/install-thehive.sh
 | Tool | URL | First login |
 |---|---|---|
 | Shuffle | `https://<host>:3443` (or `http://<host>:3001`) | Create the admin account on first visit |
-| TheHive | `http://<host>:9000` | `admin@thehive.local` / `secret` — **change it immediately** |
+| TheHive | `http://<host>:9000` | `admin@thehive.local` / `secret`: **change it immediately** |
 
 TheHive 5.3+ needs a **free Community license** from the StrangeBee License Portal, or the UI is read-only.
 Create an organisation `SOC-Lab`, an analyst user, and an **API key** for Shuffle.
@@ -37,7 +37,7 @@ az role assignment create --assignee "$APP_ID" --role "Microsoft Sentinel Respon
 
 Store the tenant ID, client ID and secret in Shuffle's **App authentication**, not in workflow fields.
 
-## 5.3 Workflow 1 — "Sentinel → TheHive" (fetch)
+## 5.3 Workflow 1: "Sentinel → TheHive" (fetch)
 
 Request templates for every call: [`soar/api/sentinel.http`](../soar/api/sentinel.http) and
 [`soar/api/thehive.http`](../soar/api/thehive.http).
@@ -74,7 +74,7 @@ flowchart TD
 Updating a Sentinel incident is a `PUT` that needs the current `etag` plus `title`, `severity` and `status`,
 so always `GET` the incident right before you write to it.
 
-## 5.4 Workflow 2 — "TheHive closed → close Sentinel" (mirror)
+## 5.4 Workflow 2: "TheHive closed → close Sentinel" (mirror)
 
 1. **Trigger:** Shuffle webhook, called by a TheHive notification when a case closes. If notifications aren't
    available on your licence, poll TheHive every minute for cases closed since the last run instead.
@@ -86,10 +86,10 @@ so always `GET` the incident right before you write to it.
 
 Create a TheHive case template **"PII Exposure"** with tasks:
 
-1. **Validate** — real PII, test data or a false match?
-2. **Contain** — remove the public or shared link, move the file, or encrypt it.
+1. **Validate**: real PII, test data or a false match?
+2. **Contain**: remove the public or shared link, move the file, or encrypt it.
 3. **Notify the data owner** and record the response.
-4. **Privacy officer review** (High and Critical) — decide whether breach reporting applies, for example under
+4. **Privacy officer review** (High and Critical): decide whether breach reporting applies, for example under
    PIPEDA's "real risk of significant harm" test. A human decision, not an automated one.
 5. **Close** with a resolution; Shuffle mirrors it to Sentinel.
 

@@ -1,4 +1,4 @@
-# Step 4 — Playbooks and automation rules
+# Step 4: Playbooks and automation rules
 
 > Learning lab. Any containment step runs against lab test accounts only.
 

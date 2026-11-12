@@ -1,4 +1,4 @@
-# Step 1 — Sentinel workspace, custom tables and DCRs
+# Step 1: Sentinel workspace, custom tables and DCRs
 
 > Learning lab. Lab subscription only.
 

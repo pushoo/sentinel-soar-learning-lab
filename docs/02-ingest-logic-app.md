@@ -1,4 +1,4 @@
-# Step 2 — Logic App 1: ingest the CSV
+# Step 2: Logic App 1: ingest the CSV
 
 > Learning lab. Lab subscription only.
 
