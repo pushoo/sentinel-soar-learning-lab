@@ -1,0 +1,22 @@
+[
+  {
+    "TimeGenerated": "2026-11-11T02:14:00Z",
+    "UserPrincipalName": "lab.victim@yourlab.onmicrosoft.com",
+    "IPAddress": "185.220.101.45",
+    "Location": "DE",
+    "ResultType": 50126,
+    "ResultDescription": "Invalid username or password",
+    "AppDisplayName": "Azure Portal",
+    "UserAgent": "python-requests/2.31"
+  },
+  {
+    "TimeGenerated": "2026-11-11T02:16:00Z",
+    "UserPrincipalName": "lab.victim@yourlab.onmicrosoft.com",
+    "IPAddress": "185.220.101.45",
+    "Location": "DE",
+    "ResultType": 0,
+    "ResultDescription": "Success",
+    "AppDisplayName": "Azure Portal",
+    "UserAgent": "python-requests/2.31"
+  }
+]

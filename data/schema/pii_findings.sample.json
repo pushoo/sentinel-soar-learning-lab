@@ -1,0 +1,24 @@
+[
+  {
+    "TimeGenerated": "2026-11-11T02:14:00Z",
+    "DataStore": "stfinancearchive",
+    "StoreType": "AzureBlob",
+    "Exposure": "Public",
+    "Owner": "fin.ops@yourlab.onmicrosoft.com",
+    "FilePath": "exports/customers_export.csv",
+    "PIIType": "CreditCard",
+    "RecordCount": 2000,
+    "Encrypted": false
+  },
+  {
+    "TimeGenerated": "2026-11-11T02:14:00Z",
+    "DataStore": "FILESRV01",
+    "StoreType": "FileShare",
+    "Exposure": "Internal",
+    "Owner": "it.support@yourlab.onmicrosoft.com",
+    "FilePath": "/it/tickets/callbacks.txt",
+    "PIIType": "Phone",
+    "RecordCount": 20,
+    "Encrypted": false
+  }
+]
