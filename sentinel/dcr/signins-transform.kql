@@ -1,0 +1,5 @@
+// DCR transform for SignInDemo_CL (paste into the custom-table wizard's transformation editor).
+// Runs at ingestion time, before you pay to store the data.
+source
+| extend TimeGenerated = todatetime(TimeGenerated)
+| extend ResultType = toint(ResultType)

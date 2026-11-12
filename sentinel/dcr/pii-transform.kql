@@ -1,0 +1,5 @@
+// DCR transform for PIIFindings_CL (paste into the custom-table wizard's transformation editor).
+source
+| extend TimeGenerated = todatetime(TimeGenerated)
+| extend RecordCount = toint(RecordCount)
+| extend Encrypted = tobool(Encrypted)
