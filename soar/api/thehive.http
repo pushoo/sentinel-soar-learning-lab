@@ -1,0 +1,39 @@
+### Learning lab: TheHive 5 REST calls used by the Shuffle workflows (VS Code "REST Client" format).
+
+@thehive = http://<thehive-host>:9000
+@apiKey = <thehive-api-key-never-commit>
+
+### 1. Create a case
+# @name case
+POST {{thehive}}/api/v1/case
+Authorization: Bearer {{apiKey}}
+Content-Type: application/json
+
+{
+  "title": "Brute force then success for lab.victim@yourlab.onmicrosoft.com from 185.220.101.45",
+  "description": "Sentinel incident #<n> (learning lab). Link: <incidentUrl>",
+  "severity": 3,
+  "tags": ["sentinel-<n>", "learning-lab", "brute-force"],
+  "sourceRef": "sentinel-<n>"
+}
+
+### 2. Add an observable to the case
+POST {{thehive}}/api/v1/case/{{case.response.body._id}}/observable
+Authorization: Bearer {{apiKey}}
+Content-Type: application/json
+
+{ "dataType": "ip", "data": "185.220.101.45", "message": "Attacker IP from Sentinel", "ioc": true }
+
+### 3. Find closed lab cases (polling alternative to webhooks)
+POST {{thehive}}/api/v1/query
+Authorization: Bearer {{apiKey}}
+Content-Type: application/json
+
+{
+  "query": [
+    { "_name": "listCase" },
+    { "_name": "filter", "_and": [ { "_field": "status", "_value": "Resolved" }, { "_field": "tags", "_value": "learning-lab" } ] },
+    { "_name": "sort", "_fields": [ { "_updatedAt": "desc" } ] },
+    { "_name": "page", "from": 0, "to": 20 }
+  ]
+}

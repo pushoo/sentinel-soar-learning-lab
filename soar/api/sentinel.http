@@ -1,0 +1,67 @@
+### Learning lab: Microsoft Sentinel REST calls used by the Shuffle workflows.
+### Works with the VS Code "REST Client" extension; copy the same requests into Shuffle's HTTP app.
+### Check the Sentinel REST docs for the latest stable api-version before you record.
+
+@tenantId = <tenant-id>
+@clientId = <shuffle-app-client-id>
+@clientSecret = <from-a-secret-store-never-commit>
+@sub = <subscription-id>
+@rg = rg-soc-lab
+@ws = law-soc-lab
+@apiVersion = 2024-03-01
+@base = https://management.azure.com/subscriptions/{{sub}}/resourceGroups/{{rg}}/providers/Microsoft.OperationalInsights/workspaces/{{ws}}/providers/Microsoft.SecurityInsights
+
+### 1. Get a token (client credentials)
+# @name token
+POST https://login.microsoftonline.com/{{tenantId}}/oauth2/v2.0/token
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=client_credentials&client_id={{clientId}}&client_secret={{clientSecret}}&scope=https%3A%2F%2Fmanagement.azure.com%2F.default
+
+### 2. List New incidents
+# @name list
+GET {{base}}/incidents?api-version={{apiVersion}}&$filter=properties/status eq 'New'&$orderby=properties/createdTimeUtc desc&$top=50
+Authorization: Bearer {{token.response.body.access_token}}
+
+### 3. Get one incident (for the etag)
+@incidentId = <incident-name-guid>
+GET {{base}}/incidents/{{incidentId}}?api-version={{apiVersion}}
+Authorization: Bearer {{token.response.body.access_token}}
+
+### 4. List the incident's entities (accounts, IPs, hosts, files)
+POST {{base}}/incidents/{{incidentId}}/entities?api-version={{apiVersion}}
+Authorization: Bearer {{token.response.body.access_token}}
+
+### 5. Add a comment (comment id = any new GUID)
+PUT {{base}}/incidents/{{incidentId}}/comments/<new-guid>?api-version={{apiVersion}}
+Authorization: Bearer {{token.response.body.access_token}}
+Content-Type: application/json
+
+{ "properties": { "message": "Case #<n> opened in TheHive by Shuffle (learning lab)." } }
+
+### 6. Set status Active (send the etag and the required fields from step 3)
+PUT {{base}}/incidents/{{incidentId}}?api-version={{apiVersion}}
+Authorization: Bearer {{token.response.body.access_token}}
+Content-Type: application/json
+
+{
+  "etag": "<etag-from-step-3>",
+  "properties": { "title": "<title-from-step-3>", "severity": "<severity-from-step-3>", "status": "Active" }
+}
+
+### 7. Close as true positive
+PUT {{base}}/incidents/{{incidentId}}?api-version={{apiVersion}}
+Authorization: Bearer {{token.response.body.access_token}}
+Content-Type: application/json
+
+{
+  "etag": "<etag-from-a-fresh-get>",
+  "properties": {
+    "title": "<title>",
+    "severity": "<severity>",
+    "status": "Closed",
+    "classification": "TruePositive",
+    "classificationReason": "SuspiciousActivity",
+    "classificationComment": "Closed from TheHive case #<n> (learning lab)."
+  }
+}
