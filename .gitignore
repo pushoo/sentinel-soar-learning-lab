@@ -1,0 +1,22 @@
+# Generated data
+*.csv
+!sentinel/watchlists/*.csv
+
+# Secrets and local config
+.env
+*.env
+!*.env.example
+secrets/
+*.pem
+*.key
+
+# Local SOAR data
+soar/vendor/
+shuffle-database/
+shuffle-apps/
+shuffle-files/
+
+# OS / editor
+.DS_Store
+.vscode/
+__pycache__/
