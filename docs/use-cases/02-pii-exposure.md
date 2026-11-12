@@ -1,4 +1,4 @@
-# Use case 2 — PII exposure across laptops and cloud, with severity ranges
+# Use case 2: PII exposure across laptops and cloud, with severity ranges
 
 > Learning lab. The generator describes *where* fake PII was "found"; it contains no PII.
 
@@ -30,9 +30,9 @@ from a risk-score range**.
 
 | Risk score | Severity | Response target |
 |---|---|---|
-| 1–99 | Informational | 14 days |
-| 100–999 | Low | 5 days |
-| 1,000–9,999 | Medium | 48 hours |
+| 1-99 | Informational | 14 days |
+| 100-999 | Low | 5 days |
+| 1,000-9,999 | Medium | 48 hours |
 | 10,000+ | High | 4 hours |
 
 **Override:** SIN, CreditCard, Passport or HealthCard on a SharedLink or Public location is always **High**
@@ -57,5 +57,5 @@ The weights and ranges are a teaching starting point, not a standard. Tune them 
 | DCR transform | [`sentinel/dcr/pii-transform.kql`](../../sentinel/dcr/pii-transform.kql) |
 | Ingest workflow | [`logic-apps/ingest-pii/workflow.json`](../../logic-apps/ingest-pii/workflow.json) |
 | Detection with dynamic severity | [`sentinel/analytics/pii-exposure-by-location.kql`](../../sentinel/analytics/pii-exposure-by-location.kql) |
-| Routing playbook | `la-pb-pii-route` — [step 4](../04-playbooks.md) |
+| Routing playbook | `la-pb-pii-route`: [step 4](../04-playbooks.md) |
 | Case template | [step 5.5](../05-shuffle-thehive.md#55-pii-case-template-use-case-2) |

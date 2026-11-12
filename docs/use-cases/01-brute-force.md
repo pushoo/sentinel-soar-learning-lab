@@ -1,4 +1,4 @@
-# Use case 1 — Brute force, then success
+# Use case 1: Brute force, then success
 
 > Learning lab. Synthetic sign-ins only.
 
@@ -13,12 +13,12 @@ an analyst closes it as a true positive, and the close is mirrored back to Senti
 | DCR transform | [`sentinel/dcr/signins-transform.kql`](../../sentinel/dcr/signins-transform.kql) |
 | Ingest workflow | [`logic-apps/ingest-signins/workflow.json`](../../logic-apps/ingest-signins/workflow.json) |
 | Detection | [`sentinel/analytics/brute-force-then-success.kql`](../../sentinel/analytics/brute-force-then-success.kql) |
-| Playbook | `la-pb-ip-enrich` — [step 4](../04-playbooks.md) |
+| Playbook | `la-pb-ip-enrich`: [step 4](../04-playbooks.md) |
 | SOAR | [step 5](../05-shuffle-thehive.md) |
 
 ## What viewers learn
 
-- ResultType 50126 (bad password) vs 0 (success) — real Entra ID codes in a fake dataset
+- ResultType 50126 (bad password) vs 0 (success): real Entra ID codes in a fake dataset
 - A KQL `join` that only fires when the success comes **after** the failures
 - Why the rule's severity is Medium and the playbook raises it
 - Why automation rules trigger on "created" only (mirroring loops)
