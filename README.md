@@ -1,4 +1,4 @@
-# Sentinel + Logic Apps + Open-Source SOAR — a Learning Lab
+# Sentinel + Logic Apps + Open-Source SOAR: a Learning Lab
 
 > **This is a learning project.** It is built for a YouTube learning series on the *CISSP Coffee Shot* channel.
 > Everything here uses **synthetic data in a lab tenant**. It is not production guidance, it is not a hardened
@@ -6,10 +6,10 @@
 
 Follow one security incident from a **CSV file** all the way to a **closed case**, using:
 
-- **Microsoft Sentinel** — the SIEM that detects
-- **Azure Logic Apps** — the workflow engine that ingests data and runs playbooks
-- **Shuffle** — open-source SOAR that orchestrates
-- **TheHive** — case management where the analyst works the case
+- **Microsoft Sentinel**: the SIEM that detects
+- **Azure Logic Apps**: the workflow engine that ingests data and runs playbooks
+- **Shuffle**: open-source SOAR that orchestrates
+- **TheHive**: case management where the analyst works the case
 
 Two use cases are included:
 
@@ -128,4 +128,4 @@ Set a budget alert anyway, and delete the resource group when you are done (see 
 
 ## License
 
-[MIT](LICENSE) — use it to learn, teach and build.
+[MIT](LICENSE): use it to learn, teach and build.
