@@ -1,0 +1,17 @@
+// Analytics rule: "Brute force followed by successful sign-in (Lab)"
+// Severity: Medium (the playbook raises it to High when the IP is malicious)
+// Tactic: Credential Access (T1110)
+// Schedule: every 5 minutes, look back 1 hour, suppression 1 hour after an alert
+// Entities: Account.FullName = UserPrincipalName, IP.Address = IPAddress
+// Custom details: FailedCount
+let lookback = 1h;
+let threshold = 20;
+let failures = SignInDemo_CL
+    | where TimeGenerated > ago(lookback) and ResultType == 50126
+    | summarize FailedCount = count(), FirstFail = min(TimeGenerated), LastFail = max(TimeGenerated)
+        by UserPrincipalName, IPAddress;
+SignInDemo_CL
+| where TimeGenerated > ago(lookback) and ResultType == 0
+| join kind=inner failures on UserPrincipalName, IPAddress
+| where FailedCount >= threshold and TimeGenerated > LastFail
+| project TimeGenerated, UserPrincipalName, IPAddress, Location, FailedCount, FirstFail, LastFail

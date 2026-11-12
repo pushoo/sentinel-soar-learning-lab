@@ -1,0 +1,31 @@
+// Analytics rule: "PII exposure by data location (Lab)"
+// Event grouping: trigger an alert for each event (one row = one data location = one incident)
+// Alert details override: severity from column "Severity"; title "PII exposure on {{DataStore}} ({{StoreType}})"
+// Entities: Account.FullName = Owner, Host.HostName = DataStore, File.Name = SampleFile
+// Custom details: RiskScore, TotalRecords, PIITypes, Exposures, Files
+// Schedule: every 5 minutes, look back 1 hour, suppression 1 hour after an alert
+//
+// Risk score = RecordCount x PII type weight x exposure weight, summed per data location.
+// Ranges: 1-99 Informational | 100-999 Low | 1,000-9,999 Medium | 10,000+ High
+// Override: SIN / CreditCard / Passport / HealthCard on a SharedLink or Public location is always High.
+let typeWeight = datatable(PIIType:string, W:int)[
+    "Email",1, "Phone",1, "Address",2, "DOB",3, "DriversLicence",5,
+    "Passport",8, "HealthCard",8, "SIN",10, "CreditCard",10];
+let exposureWeight = datatable(Exposure:string, E:int)[
+    "Private",1, "Internal",2, "SharedLink",5, "Public",10];
+let highRiskTypes = dynamic(["SIN","CreditCard","Passport","HealthCard"]);
+PIIFindings_CL
+| where TimeGenerated > ago(1h)
+| lookup kind=leftouter typeWeight on PIIType
+| lookup kind=leftouter exposureWeight on Exposure
+| extend RowScore = RecordCount * coalesce(W, 1) * coalesce(E, 1),
+         ForceHigh = PIIType in (highRiskTypes) and Exposure in ("Public", "SharedLink")
+| summarize RiskScore = sum(RowScore), TotalRecords = sum(RecordCount),
+            Files = dcount(FilePath), PIITypes = make_set(PIIType),
+            Exposures = make_set(Exposure), ForceHigh = max(toint(ForceHigh)),
+            SampleFile = take_any(FilePath)
+    by DataStore, StoreType, Owner
+| extend Severity = case(ForceHigh == 1 or RiskScore >= 10000, "High",
+                         RiskScore >= 1000, "Medium",
+                         RiskScore >= 100, "Low",
+                         "Informational")
