@@ -1,0 +1,99 @@
+{
+  "definition": {
+    "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+      "ingestionUrl": {
+        "type": "String",
+        "defaultValue": "https://<logs-ingestion-endpoint>/dataCollectionRules/<dcr-immutable-id>/streams/Custom-SignInDemo_CL?api-version=2023-01-01"
+      }
+    },
+    "triggers": {
+      "When_a_CSV_is_posted": {
+        "type": "Request",
+        "kind": "Http",
+        "inputs": {
+          "method": "POST"
+        }
+      }
+    },
+    "actions": {
+      "Lines": {
+        "type": "Compose",
+        "runAfter": {},
+        "inputs": "@skip(split(replace(string(triggerBody()), decodeUriComponent('%0D'), ''), decodeUriComponent('%0A')), 1)"
+      },
+      "Non_empty_lines": {
+        "type": "Query",
+        "runAfter": {
+          "Lines": [
+            "Succeeded"
+          ]
+        },
+        "inputs": {
+          "from": "@outputs('Lines')",
+          "where": "@greater(length(trim(item())), 0)"
+        }
+      },
+      "Rows": {
+        "type": "Select",
+        "runAfter": {
+          "Non_empty_lines": [
+            "Succeeded"
+          ]
+        },
+        "inputs": {
+          "from": "@body('Non_empty_lines')",
+          "select": {
+            "TimeGenerated": "@split(item(), ',')[0]",
+            "UserPrincipalName": "@split(item(), ',')[1]",
+            "IPAddress": "@split(item(), ',')[2]",
+            "Location": "@split(item(), ',')[3]",
+            "ResultType": "@int(split(item(), ',')[4])",
+            "ResultDescription": "@split(item(), ',')[5]",
+            "AppDisplayName": "@split(item(), ',')[6]",
+            "UserAgent": "@split(item(), ',')[7]"
+          }
+        }
+      },
+      "Send_to_Logs_Ingestion_API": {
+        "type": "Http",
+        "runAfter": {
+          "Rows": [
+            "Succeeded"
+          ]
+        },
+        "inputs": {
+          "method": "POST",
+          "uri": "@parameters('ingestionUrl')",
+          "headers": {
+            "Content-Type": "application/json"
+          },
+          "body": "@body('Rows')",
+          "authentication": {
+            "type": "ManagedServiceIdentity",
+            "audience": "https://monitor.azure.com"
+          }
+        }
+      },
+      "Response": {
+        "type": "Response",
+        "kind": "Http",
+        "runAfter": {
+          "Send_to_Logs_Ingestion_API": [
+            "Succeeded"
+          ]
+        },
+        "inputs": {
+          "statusCode": 202,
+          "body": {
+            "rowsSent": "@length(body('Rows'))",
+            "table": "SignInDemo_CL"
+          }
+        }
+      }
+    },
+    "outputs": {}
+  },
+  "parameters": {}
+}
