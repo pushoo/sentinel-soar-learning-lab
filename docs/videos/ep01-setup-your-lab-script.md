@@ -30,9 +30,11 @@ If `docker run` says it can't find `docker-credential-desktop` (left over from D
 
 ## Narration
 
+Final narration, as it is in the published video.
+
 **Hook**
 - s01 In the last episode we planned the lab. Now we build the foundation.
-- s02 Ten minutes, a few commands, and nothing to pay.
+- s02 About fifteen minutes, one password, and nothing to pay.
 - s03 This is a learning lab, with synthetic data only.
 
 **Get the repo**
@@ -44,9 +46,9 @@ If `docker run` says it can't find `docker-credential-desktop` (left over from D
 
 **Homebrew**
 - s09 We'll install both with Homebrew, the free package manager for macOS.
-- s10 Paste the install command from brew dot s h.
-- s11 It asks for your Mac password. That's normal, it needs to create its folder.
-- s12 When it finishes, these two lines put brew on your path.
+- s10 The simplest way in is the official installer package, from Homebrew's GitHub releases.
+- s11 It's signed and notarized by Apple. Double-click it, and enter your Mac password.
+- s12 That's the only password today. Then add brew to your path.
 
 **Tools**
 - s13 Now one command installs everything else.
@@ -54,7 +56,7 @@ If `docker run` says it can't find `docker-credential-desktop` (left over from D
 - s15 Colima runs Docker inside a small, free virtual machine.
 - s16 It's much lighter than Docker Desktop, which matters on an eight gigabyte laptop.
 - s17 Start it with two CPUs and five gigabytes of memory.
-- s18 That cap keeps the rest of the Mac usable while we record.
+- s18 That cap keeps the rest of the Mac usable.
 - s19 Hello from Docker. The engine works.
 
 **Azure**
@@ -68,14 +70,16 @@ If `docker run` says it can't find `docker-credential-desktop` (left over from D
 **Budget**
 - s26 One safety net before we build anything.
 - s27 In the portal, open Cost Management, then Budgets.
-- s28 Add a budget of five dollars a month, with an email alert at fifty percent.
+- s28 Here's mine: five dollars a month, with email alerts at fifty and one hundred percent.
 - s29 If anything ever runs that shouldn't, you'll hear about it early.
 
 **Check again**
 - s30 Run the checker one more time.
 - s31 Python, Git, the Azure CLI, and a running Docker engine. All green.
+- s32 One tip: when you're done for the day, colima stop gives the memory back.
 
 **Wrap**
-- s32 That's the foundation done.
-- s33 Commands are in the repo, linked below, if you want to copy them.
-- s34 Next episode, we turn on Microsoft Sentinel and start the free trial.
+- s33 That's the foundation done.
+- s34 Commands are in the repo, linked below, if you want to copy them.
+- s35 Next episode, we turn on Microsoft Sentinel and start the free trial.
+
