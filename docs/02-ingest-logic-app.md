@@ -38,6 +38,13 @@ az role assignment create --assignee-object-id "$PRINCIPAL" --assignee-principal
 
 Repeat for `la-ingest-pii` and `dcr-pii-findings`. Role assignments can take a few minutes to apply.
 
+## 2.2b Same thing in the portal (as in Episode 04)
+
+1. Open `dcr-signin-demo` → **Access control (IAM)** → **Add role assignment**.
+2. Role: **Monitoring Metrics Publisher** → Next.
+3. Members: **Managed identity** → **+ Select members** → Managed identity: **Logic app** → `la-ingest-signins` → Select.
+4. **Review + assign** twice. Least privilege: the app can send data through this one rule and nothing else.
+
 ## 2.3 Send a CSV
 
 Copy the trigger URL from the Logic App (**Overview → Workflow URL**, or open the trigger in the designer).
@@ -50,6 +57,13 @@ curl -sS -X POST -H "Content-Type: text/plain" --data-binary @signins.csv "$SIGN
 ```
 
 Then in Logs: `SignInDemo_CL | take 10`. The first rows in a brand-new table can take several minutes to appear.
+
+### Test from the portal (no terminal)
+
+In the designer, select **Run → Run with payload**. The portal sends the body as `application/json`, so paste the
+CSV as one JSON string (the whole file in quotes, line breaks written as `\n`). The workflow reads
+`string(triggerBody())`, so the CSV comes through the same way. Expect `202` and `{"rowsSent":58,"table":"SignInDemo_CL"}`,
+then open the run: every step green, and the **Send to Logs Ingestion API** step returns `204`.
 
 ## Alternative: Blob Storage trigger (designer)
 

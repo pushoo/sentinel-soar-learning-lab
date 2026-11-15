@@ -14,6 +14,18 @@ Script and cue card: [videos/ep01-setup-your-lab-script.md](videos/ep01-setup-yo
 
 Script: [videos/ep02-sentinel-workspace-script.md](videos/ep02-sentinel-workspace-script.md)
 
+## Episode 3: The custom table and its transform (about 4 min)
+
+Script: [videos/ep03-custom-table-script.md](videos/ep03-custom-table-script.md)
+
+## Episode 4: The Logic App that sends the CSV in (about 3.5 min)
+
+Script and recording plan: [videos/ep04-logic-app-ingest-script.md](videos/ep04-logic-app-ingest-script.md)
+
+## Bonus: Microsoft Sentinel 101, by example (about 3 min)
+
+Collect, detect, investigate, respond, explained with one brute-force story.
+
 ## Later episodes (split into short parts when recorded)
 
 ### Brute force, end to end
