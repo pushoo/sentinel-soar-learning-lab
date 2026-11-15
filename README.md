@@ -64,8 +64,13 @@ More diagrams (sequence of one incident, where each piece runs): [docs/architect
 | Episode | Title | Guide |
 |---|---|---|
 | **0** | **Prerequisites: build a free SOC lab** | [docs/00-prerequisites.md](docs/00-prerequisites.md) · [script](docs/videos/ep00-prerequisites-script.md) |
-| 1 | Brute force → Sentinel → Logic Apps → Shuffle → TheHive, end to end | [use case 1](docs/use-cases/01-brute-force.md) |
-| 2 | PII exposure with severity ranges | [use case 2](docs/use-cases/02-pii-exposure.md) |
+| 1 | Set up your lab, step by step (macOS) | [script](docs/videos/ep01-setup-your-lab-script.md) |
+| 2 | Turn on Microsoft Sentinel | [docs/01-sentinel-workspace.md](docs/01-sentinel-workspace.md) · [script](docs/videos/ep02-sentinel-workspace-script.md) |
+| 3 | The custom table and its transform | [script](docs/videos/ep03-custom-table-script.md) |
+| 4 | The Logic App that sends the CSV in | [docs/02-ingest-logic-app.md](docs/02-ingest-logic-app.md) · [script](docs/videos/ep04-logic-app-ingest-script.md) |
+| Bonus | Microsoft Sentinel 101, by example | [docs/video-series.md](docs/video-series.md) |
+| Next | Brute force → Sentinel → Logic Apps → Shuffle → TheHive, end to end | [use case 1](docs/use-cases/01-brute-force.md) |
+| Later | PII exposure with severity ranges | [use case 2](docs/use-cases/02-pii-exposure.md) |
 
 Full shot lists: [docs/video-series.md](docs/video-series.md)
 
