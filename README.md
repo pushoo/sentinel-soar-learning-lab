@@ -68,8 +68,10 @@ More diagrams (sequence of one incident, where each piece runs): [docs/architect
 | 2 | Turn on Microsoft Sentinel | [docs/01-sentinel-workspace.md](docs/01-sentinel-workspace.md) · [script](docs/videos/ep02-sentinel-workspace-script.md) |
 | 3 | The custom table and its transform | [script](docs/videos/ep03-custom-table-script.md) |
 | 4 | The Logic App that sends the CSV in | [docs/02-ingest-logic-app.md](docs/02-ingest-logic-app.md) · [script](docs/videos/ep04-logic-app-ingest-script.md) |
+| 5 | The detection rule: query in, incident out | [docs/03-detections.md](docs/03-detections.md) · [script](docs/videos/ep05-detection-rule-script.md) |
 | Bonus | Microsoft Sentinel 101, by example | [docs/video-series.md](docs/video-series.md) |
-| Next | Brute force → Sentinel → Logic Apps → Shuffle → TheHive, end to end | [use case 1](docs/use-cases/01-brute-force.md) |
+| Next | Automation rule and playbook: the incident starts a response by itself | [docs/04-playbooks.md](docs/04-playbooks.md) |
+| Then | Brute force → Sentinel → Logic Apps → Shuffle → TheHive, end to end | [use case 1](docs/use-cases/01-brute-force.md) |
 | Later | PII exposure with severity ranges | [use case 2](docs/use-cases/02-pii-exposure.md) |
 
 Full shot lists: [docs/video-series.md](docs/video-series.md)
@@ -120,7 +122,7 @@ Designed to run at **$0** for a learning project:
 
 - **Sentinel**: a new workspace gets a 31-day free trial (10 GB/day). The CSVs are a few KB.
 - **Logic Apps (Consumption)**: a few cents at this volume; covered by an Azure free account credit if you have one.
-- **Shuffle + TheHive**: self-hosted, free. Run them on an Oracle Cloud Always Free ARM VM, or on your own machine.
+- **Shuffle + TheHive**: self-hosted, free. TheHive's Community license from StrangeBee is free for non-commercial use (students, researchers and home labs; 2 users, 1 organization), a good fit for this lab. Run them on an Oracle Cloud Always Free ARM VM, or on your own machine.
 
 Set a budget alert anyway, and delete the resource group when you are done (see [cleanup](docs/06-dry-run-and-cleanup.md)).
 
