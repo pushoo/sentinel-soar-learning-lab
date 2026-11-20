@@ -22,7 +22,7 @@ bash soar/install-thehive.sh
 | Shuffle | `https://<host>:3443` (or `http://<host>:3001`) | Create the admin account on first visit |
 | TheHive | `http://<host>:9000` | `admin@thehive.local` / `secret`: **change it immediately** |
 
-TheHive 5.3+ needs a **free Community license** from the StrangeBee License Portal, or the UI is read-only.
+TheHive 5.3+ needs a license, or the UI is read-only. StrangeBee's **Community license is free** for non-commercial, non-production use (students, researchers and home labs; 2 users, 1 organization), which makes it a good fit for this lab. Request it from the StrangeBee License Portal.
 Create an organisation `SOC-Lab`, an analyst user, and an **API key** for Shuffle.
 
 ## 5.2 Give Shuffle access to Sentinel

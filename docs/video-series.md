@@ -22,6 +22,10 @@ Script: [videos/ep03-custom-table-script.md](videos/ep03-custom-table-script.md)
 
 Script and recording plan: [videos/ep04-logic-app-ingest-script.md](videos/ep04-logic-app-ingest-script.md)
 
+## Episode 5: The detection rule: query in, incident out (about 3 min)
+
+Script and recording plan: [videos/ep05-detection-rule-script.md](videos/ep05-detection-rule-script.md)
+
 ## Bonus: Microsoft Sentinel 101, by example (about 3 min)
 
 Collect, detect, investigate, respond, explained with one brute-force story.
