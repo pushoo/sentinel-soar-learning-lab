@@ -1,0 +1,207 @@
+{
+    "definition": {
+        "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+        "contentVersion": "1.0.0.0",
+        "triggers": {
+            "Microsoft_Sentinel_incident": {
+                "type": "ApiConnectionWebhook",
+                "inputs": {
+                    "host": {
+                        "connection": {
+                            "name": "@parameters('$connections')['azuresentinel']['connectionId']"
+                        }
+                    },
+                    "body": {
+                        "callback_url": "@{listCallbackUrl()}"
+                    },
+                    "path": "/incident-creation"
+                }
+            }
+        },
+        "actions": {
+            "Get_BadIPs_watchlist": {
+                "type": "Http",
+                "runAfter": {},
+                "inputs": {
+                    "method": "GET",
+                    "uri": "https://management.azure.com/subscriptions/@{triggerBody()?['workspaceInfo']?['SubscriptionId']}/resourceGroups/@{triggerBody()?['workspaceInfo']?['ResourceGroupName']}/providers/Microsoft.OperationalInsights/workspaces/@{triggerBody()?['workspaceInfo']?['WorkspaceName']}/providers/Microsoft.SecurityInsights/watchlists/BadIPs/watchlistItems?api-version=2024-03-01",
+                    "authentication": {
+                        "type": "ManagedServiceIdentity",
+                        "audience": "https://management.azure.com/"
+                    }
+                }
+            },
+            "Bad_IPs": {
+                "type": "Select",
+                "runAfter": {
+                    "Get_BadIPs_watchlist": [
+                        "Succeeded"
+                    ]
+                },
+                "inputs": {
+                    "from": "@body('Get_BadIPs_watchlist')?['value']",
+                    "select": "@item()?['properties']?['itemsKeyValue']?['IP']"
+                }
+            },
+            "Incident_IP_entities": {
+                "type": "Query",
+                "runAfter": {
+                    "Bad_IPs": [
+                        "Succeeded"
+                    ]
+                },
+                "inputs": {
+                    "from": "@triggerBody()?['object']?['properties']?['relatedEntities']",
+                    "where": "@equals(item()?['kind'], 'Ip')"
+                }
+            },
+            "Incident_IPs": {
+                "type": "Select",
+                "runAfter": {
+                    "Incident_IP_entities": [
+                        "Succeeded"
+                    ]
+                },
+                "inputs": {
+                    "from": "@body('Incident_IP_entities')",
+                    "select": "@item()?['properties']?['address']"
+                }
+            },
+            "Bad_IPs_in_incident": {
+                "type": "Query",
+                "runAfter": {
+                    "Incident_IPs": [
+                        "Succeeded"
+                    ]
+                },
+                "inputs": {
+                    "from": "@body('Incident_IPs')",
+                    "where": "@contains(body('Bad_IPs'), item())"
+                }
+            },
+            "Get_incident": {
+                "type": "Http",
+                "runAfter": {
+                    "Bad_IPs_in_incident": [
+                        "Succeeded"
+                    ]
+                },
+                "inputs": {
+                    "method": "GET",
+                    "uri": "https://management.azure.com@{triggerBody()?['object']?['id']}?api-version=2024-03-01",
+                    "authentication": {
+                        "type": "ManagedServiceIdentity",
+                        "audience": "https://management.azure.com/"
+                    }
+                }
+            },
+            "Any_bad_IP": {
+                "type": "If",
+                "runAfter": {
+                    "Get_incident": [
+                        "Succeeded"
+                    ]
+                },
+                "expression": {
+                    "and": [
+                        {
+                            "greater": [
+                                "@length(body('Bad_IPs_in_incident'))",
+                                0
+                            ]
+                        }
+                    ]
+                },
+                "actions": {
+                    "Raise_to_High_and_tag": {
+                        "type": "Http",
+                        "runAfter": {},
+                        "inputs": {
+                            "method": "PUT",
+                            "uri": "https://management.azure.com@{triggerBody()?['object']?['id']}?api-version=2024-03-01",
+                            "authentication": {
+                                "type": "ManagedServiceIdentity",
+                                "audience": "https://management.azure.com/"
+                            },
+                            "body": {
+                                "etag": "@{body('Get_incident')?['etag']}",
+                                "properties": {
+                                    "title": "@{body('Get_incident')?['properties']?['title']}",
+                                    "severity": "High",
+                                    "status": "@{body('Get_incident')?['properties']?['status']}",
+                                    "labels": "@union(coalesce(body('Get_incident')?['properties']?['labels'], createArray()), createArray(json('{\"labelName\":\"malicious-ip\",\"labelType\":\"User\"}'), json('{\"labelName\":\"auto-enriched\",\"labelType\":\"User\"}')))"
+                                }
+                            }
+                        }
+                    },
+                    "Comment_why": {
+                        "type": "Http",
+                        "runAfter": {
+                            "Raise_to_High_and_tag": [
+                                "Succeeded"
+                            ]
+                        },
+                        "inputs": {
+                            "method": "PUT",
+                            "uri": "https://management.azure.com@{triggerBody()?['object']?['id']}/comments/@{guid()}?api-version=2024-03-01",
+                            "authentication": {
+                                "type": "ManagedServiceIdentity",
+                                "audience": "https://management.azure.com/"
+                            },
+                            "body": {
+                                "properties": {
+                                    "message": "Lab playbook la-pb-ip-enrich: @{join(body('Bad_IPs_in_incident'), ', ')} is on the BadIPs watchlist (Tor exit range). Severity raised from Medium to High. Tagged malicious-ip and auto-enriched."
+                                }
+                            }
+                        }
+                    }
+                },
+                "else": {
+                    "actions": {
+                        "Comment_no_hits": {
+                            "type": "Http",
+                            "runAfter": {},
+                            "inputs": {
+                                "method": "PUT",
+                                "uri": "https://management.azure.com@{triggerBody()?['object']?['id']}/comments/@{guid()}?api-version=2024-03-01",
+                                "authentication": {
+                                    "type": "ManagedServiceIdentity",
+                                    "audience": "https://management.azure.com/"
+                                },
+                                "body": {
+                                    "properties": {
+                                        "message": "Lab playbook la-pb-ip-enrich: no reputation hits for @{join(body('Incident_IPs'), ', ')}."
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "outputs": {},
+        "parameters": {
+            "$connections": {
+                "type": "Object",
+                "defaultValue": {}
+            }
+        }
+    },
+    "parameters": {
+        "$connections": {
+            "type": "Object",
+            "value": {
+                "azuresentinel": {
+                    "id": "/subscriptions/<your-subscription-id>/providers/Microsoft.Web/locations/canadacentral/managedApis/azuresentinel",
+                    "connectionId": "/subscriptions/<your-subscription-id>/resourceGroups/rg-soc-lab/providers/Microsoft.Web/connections/azuresentinel-la-pb-ip-enrich",
+                    "connectionName": "azuresentinel-la-pb-ip-enrich",
+                    "connectionProperties": {
+                        "authentication": {
+                            "type": "ManagedServiceIdentity"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
