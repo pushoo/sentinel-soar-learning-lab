@@ -1,6 +1,6 @@
 // Analytics rule: "PII exposure by data location (Lab)"
 // Event grouping: trigger an alert for each event (one row = one data location = one incident)
-// Alert details override: severity from column "Severity"; title "PII exposure on {{DataStore}} ({{StoreType}})"
+// Alert details override: severity from column "Severity"; title "PII exposure on {{DataStore}} ({{StoreType}})"; description "{{Reason}}"
 // Entities: Account.FullName = Owner, Host.HostName = DataStore, File.Name = SampleFile
 // Custom details: RiskScore, TotalRecords, PIITypes, Exposures, Files
 // Schedule: every 5 minutes, look back 1 hour, suppression 1 hour after an alert
@@ -29,3 +29,5 @@ PIIFindings_CL
                          RiskScore >= 1000, "Medium",
                          RiskScore >= 100, "Low",
                          "Informational")
+| extend Reason = strcat("Risk score ", tostring(RiskScore), " (records x PII weight x exposure weight)",
+                         iff(ForceHigh == 1, ". High-risk PII on a shared or public location: override to High.", "."))
