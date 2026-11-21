@@ -7,7 +7,8 @@ here="$(cd "$(dirname "$0")" && pwd)"
 cd "$here/thehive"
 
 if [ ! -f .env ]; then
-  secret="$(LC_ALL=C tr -dc 'A-Za-z0-9' </dev/urandom | head -c 40)"
+  # openssl avoids "tr </dev/urandom | head", which exits 141 (SIGPIPE) under pipefail.
+  secret="$(openssl rand -hex 20)"
   printf 'THEHIVE_SECRET=%s\n' "$secret" > .env
   chmod 600 .env
   echo "Generated soar/thehive/.env with a random application secret (git-ignored)."

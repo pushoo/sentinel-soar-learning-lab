@@ -18,7 +18,7 @@ if [ "$(uname -s)" = "Linux" ]; then
 fi
 
 # Apply the memory caps only if the upstream compose file still has an "opensearch" service.
-if docker compose config --services | grep -qx opensearch; then
+if docker compose config --services | grep -x opensearch >/dev/null; then
   cp "$here/shuffle/docker-compose.override.yml" ./docker-compose.override.yml
   echo "Applied lab memory caps (docker-compose.override.yml)."
 else
