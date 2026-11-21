@@ -1,0 +1,224 @@
+{
+  "definition": {
+    "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+      "$connections": {
+        "defaultValue": {},
+        "type": "Object"
+      }
+    },
+    "triggers": {
+      "Microsoft_Sentinel_incident": {
+        "type": "ApiConnectionWebhook",
+        "inputs": {
+          "host": {
+            "connection": {
+              "name": "@parameters('$connections')['azuresentinel']['connectionId']"
+            }
+          },
+          "body": {
+            "callback_url": "@{listCallbackUrl()}"
+          },
+          "path": "/incident-creation"
+        }
+      }
+    },
+    "actions": {
+      "Initialize_Tag": {
+        "type": "InitializeVariable",
+        "runAfter": {},
+        "inputs": {
+          "variables": [
+            {
+              "name": "Tag",
+              "type": "string",
+              "value": "pii-review"
+            }
+          ]
+        }
+      },
+      "Initialize_Note": {
+        "type": "InitializeVariable",
+        "runAfter": {
+          "Initialize_Tag": [
+            "Succeeded"
+          ]
+        },
+        "inputs": {
+          "variables": [
+            {
+              "name": "Note",
+              "type": "string",
+              "value": ""
+            }
+          ]
+        }
+      },
+      "Switch_on_severity": {
+        "type": "Switch",
+        "runAfter": {
+          "Initialize_Note": [
+            "Succeeded"
+          ]
+        },
+        "expression": "@triggerBody()?['object']?['properties']?['severity']",
+        "cases": {
+          "High": {
+            "case": "High",
+            "actions": {
+              "Set_tag_high": {
+                "type": "SetVariable",
+                "runAfter": {},
+                "inputs": {
+                  "name": "Tag",
+                  "value": "pii-high"
+                }
+              },
+              "Set_note_high": {
+                "type": "SetVariable",
+                "runAfter": {
+                  "Set_tag_high": [
+                    "Succeeded"
+                  ]
+                },
+                "inputs": {
+                  "name": "Note",
+                  "value": "High PII exposure: privacy team alerted, owner asked to pull the public or shared link now. Response target 4 hours."
+                }
+              }
+            }
+          },
+          "Medium": {
+            "case": "Medium",
+            "actions": {
+              "Set_tag_medium": {
+                "type": "SetVariable",
+                "runAfter": {},
+                "inputs": {
+                  "name": "Tag",
+                  "value": "pii-medium"
+                }
+              },
+              "Set_note_medium": {
+                "type": "SetVariable",
+                "runAfter": {
+                  "Set_tag_medium": [
+                    "Succeeded"
+                  ]
+                },
+                "inputs": {
+                  "name": "Note",
+                  "value": "Medium PII exposure: owner asked to move, encrypt or delete the data within 48 hours."
+                }
+              }
+            }
+          }
+        },
+        "default": {
+          "actions": {
+            "Set_tag_review": {
+              "type": "SetVariable",
+              "runAfter": {},
+              "inputs": {
+                "name": "Tag",
+                "value": "pii-review"
+              }
+            },
+            "Set_note_review": {
+              "type": "SetVariable",
+              "runAfter": {
+                "Set_tag_review": [
+                  "Succeeded"
+                ]
+              },
+              "inputs": {
+                "name": "Note",
+                "value": "Low or informational PII exposure: queued for privacy review (5 to 14 days)."
+              }
+            }
+          }
+        }
+      },
+      "Get_incident": {
+        "type": "Http",
+        "runAfter": {
+          "Switch_on_severity": [
+            "Succeeded"
+          ]
+        },
+        "inputs": {
+          "method": "GET",
+          "uri": "https://management.azure.com@{triggerBody()?['object']?['id']}?api-version=2024-03-01",
+          "authentication": {
+            "type": "ManagedServiceIdentity",
+            "audience": "https://management.azure.com/"
+          }
+        }
+      },
+      "Add_tag": {
+        "type": "Http",
+        "runAfter": {
+          "Get_incident": [
+            "Succeeded"
+          ]
+        },
+        "inputs": {
+          "method": "PUT",
+          "uri": "https://management.azure.com@{triggerBody()?['object']?['id']}?api-version=2024-03-01",
+          "authentication": {
+            "type": "ManagedServiceIdentity",
+            "audience": "https://management.azure.com/"
+          },
+          "body": {
+            "etag": "@{body('Get_incident')?['etag']}",
+            "properties": {
+              "title": "@{body('Get_incident')?['properties']?['title']}",
+              "severity": "@{body('Get_incident')?['properties']?['severity']}",
+              "status": "@{body('Get_incident')?['properties']?['status']}",
+              "labels": "@union(coalesce(body('Get_incident')?['properties']?['labels'], createArray()), createArray(json(concat('{\"labelName\":\"', variables('Tag'), '\",\"labelType\":\"User\"}')), json('{\"labelName\":\"auto-enriched\",\"labelType\":\"User\"}')))"
+            }
+          }
+        }
+      },
+      "Comment": {
+        "type": "Http",
+        "runAfter": {
+          "Add_tag": [
+            "Succeeded"
+          ]
+        },
+        "inputs": {
+          "method": "PUT",
+          "uri": "https://management.azure.com@{triggerBody()?['object']?['id']}/comments/@{guid()}?api-version=2024-03-01",
+          "authentication": {
+            "type": "ManagedServiceIdentity",
+            "audience": "https://management.azure.com/"
+          },
+          "body": {
+            "properties": {
+              "message": "Lab playbook la-pb-pii-route: @{variables('Note')} Tagged @{variables('Tag')}."
+            }
+          }
+        }
+      }
+    },
+    "outputs": {}
+  },
+  "parameters": {
+    "$connections": {
+      "value": {
+        "azuresentinel": {
+          "connectionId": "/subscriptions/<subscription-id>/resourceGroups/rg-soc-lab/providers/Microsoft.Web/connections/<sentinel-connection>",
+          "connectionName": "<sentinel-connection>",
+          "id": "/subscriptions/<subscription-id>/providers/Microsoft.Web/locations/canadacentral/managedApis/azuresentinel",
+          "connectionProperties": {
+            "authentication": {
+              "type": "ManagedServiceIdentity"
+            }
+          }
+        }
+      }
+    }
+  }
+}
