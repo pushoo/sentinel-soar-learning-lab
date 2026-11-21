@@ -70,9 +70,11 @@ More diagrams (sequence of one incident, where each piece runs): [docs/architect
 | 4 | The Logic App that sends the CSV in | [docs/02-ingest-logic-app.md](docs/02-ingest-logic-app.md) · [script](docs/videos/ep04-logic-app-ingest-script.md) |
 | 5 | The detection rule: query in, incident out | [docs/03-detections.md](docs/03-detections.md) · [script](docs/videos/ep05-detection-rule-script.md) |
 | Bonus | Microsoft Sentinel 101, by example | [docs/video-series.md](docs/video-series.md) |
-| Next | Automation rule and playbook: the incident starts a response by itself | [docs/04-playbooks.md](docs/04-playbooks.md) |
-| Then | Brute force → Sentinel → Logic Apps → Shuffle → TheHive, end to end | [use case 1](docs/use-cases/01-brute-force.md) |
-| Later | PII exposure with severity ranges | [use case 2](docs/use-cases/02-pii-exposure.md) |
+| 6 | The playbook: the incident starts a response by itself | [docs/04-playbooks.md](docs/04-playbooks.md) · [script](docs/videos/ep06-playbook-script.md) |
+| 7a | The SOAR box: one VM with TheHive and Shuffle | [docs/05-shuffle-thehive.md](docs/05-shuffle-thehive.md) · [script](docs/videos/ep07a-soar-box-script.md) |
+| 7b | Sentinel to TheHive, and back | [docs/05-shuffle-thehive.md](docs/05-shuffle-thehive.md) · [script](docs/videos/ep07b-sentinel-to-thehive-script.md) |
+| 8 | PII exposure, with severity ranges | [use case 2](docs/use-cases/02-pii-exposure.md) · [script](docs/videos/ep08-pii-exposure-script.md) |
+| Next | The full dry run, brute force end to end, then cleanup | [use case 1](docs/use-cases/01-brute-force.md) · [docs/06-dry-run-and-cleanup.md](docs/06-dry-run-and-cleanup.md) |
 
 Full shot lists: [docs/video-series.md](docs/video-series.md)
 
@@ -122,7 +124,7 @@ Designed to run at **$0** for a learning project:
 
 - **Sentinel**: a new workspace gets a 31-day free trial (10 GB/day). The CSVs are a few KB.
 - **Logic Apps (Consumption)**: a few cents at this volume; covered by an Azure free account credit if you have one.
-- **Shuffle + TheHive**: self-hosted, free. TheHive's Community license from StrangeBee is free for non-commercial use (students, researchers and home labs; 2 users, 1 organization), a good fit for this lab. Run them on an Oracle Cloud Always Free ARM VM, or on your own machine.
+- **Shuffle + TheHive**: self-hosted, free. TheHive's Community license from StrangeBee is free for non-commercial use (students, researchers and home labs; 2 users, 1 organization), a good fit for this lab. Run them on a small Azure VM that you stop between sessions (the series does this in Episode 7a), an Oracle Cloud Always Free ARM VM, or your own machine.
 
 Set a budget alert anyway, and delete the resource group when you are done (see [cleanup](docs/06-dry-run-and-cleanup.md)).
 
