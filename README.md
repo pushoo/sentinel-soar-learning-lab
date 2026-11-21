@@ -61,6 +61,8 @@ More diagrams (sequence of one incident, where each piece runs): [docs/architect
 
 ## Video series
 
+**Full course, all parts in one video (31 min):** on the [CISSP Coffee Shot YouTube channel](https://www.youtube.com/@CISSP-COFFEE-SHOT). Chapters and scripts: [docs/videos/full-course.md](docs/videos/full-course.md)
+
 | Episode | Title | Guide |
 |---|---|---|
 | **0** | **Prerequisites: build a free SOC lab** | [docs/00-prerequisites.md](docs/00-prerequisites.md) · [script](docs/videos/ep00-prerequisites-script.md) |
