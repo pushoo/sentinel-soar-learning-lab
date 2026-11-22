@@ -1,25 +1,27 @@
 # Full course: all parts in one video
 
-> CISSP Coffee Shot, Sentinel + SOAR learning lab. Learning lab, synthetic data only. About 31 minutes.
+> CISSP Coffee Shot, Sentinel + SOAR learning lab. Learning lab, synthetic data only. About 32 minutes.
 > Watch on the [CISSP Coffee Shot YouTube channel](https://www.youtube.com/@CISSP-COFFEE-SHOT). The direct video link is added here once it is published.
 
-Every episode, from the prerequisites to the PII use case, back to back. Each episode ends with its own "Next" card, which leads into the next chapter. The Bonus (Microsoft Sentinel 101) plays after Episode 03, right before the Logic App, so the brute-force story runs in order.
+It opens with why a home lab and hands-on learning help, then plays every episode, from the prerequisites to the PII use case, back to back, and closes with how to learn by doing. Each episode ends with its own "Next" card, which leads into the next chapter. The Bonus (Microsoft Sentinel 101) plays after Episode 03, right before the Logic App, so the brute-force story runs in order.
 
 ## Chapters
 
 | Time | Chapter | Script |
 |---|---|---|
-| 0:00 | Ep00 Prerequisites: build a free SOC lab | [script](ep00-prerequisites-script.md) |
-| 2:53 | Ep01 Set up your lab | [script](ep01-setup-your-lab-script.md) |
-| 5:16 | Ep02 Turn on Microsoft Sentinel | [script](ep02-sentinel-workspace-script.md) |
-| 7:50 | Ep03 The custom table and its transform | [script](ep03-custom-table-script.md) |
-| 10:02 | Bonus: Microsoft Sentinel 101 | [video series](../video-series.md) |
-| 11:47 | Ep04 The Logic App that sends the CSV in | [script](ep04-logic-app-ingest-script.md) |
-| 15:08 | Ep05 The detection rule | [script](ep05-detection-rule-script.md) |
-| 17:55 | Ep06 Automation rule and playbook | [script](ep06-playbook-script.md) |
-| 21:15 | Ep07a The SOAR box: TheHive and Shuffle | [script](ep07a-soar-box-script.md) |
-| 24:27 | Ep07b Sentinel to TheHive, and back | [script](ep07b-sentinel-to-thehive-script.md) |
-| 27:00 | Ep08 PII exposure with severity ranges | [script](ep08-pii-exposure-script.md) |
+| 0:00 | Why hands-on learning and a home lab | [README: why a home lab](../../README.md#why-a-home-lab-and-why-hands-on) |
+| 0:30 | Ep00 Prerequisites: build a free SOC lab | [script](ep00-prerequisites-script.md) |
+| 3:17 | Ep01 Set up your lab | [script](ep01-setup-your-lab-script.md) |
+| 5:40 | Ep02 Turn on Microsoft Sentinel | [script](ep02-sentinel-workspace-script.md) |
+| 8:14 | Ep03 The custom table and its transform | [script](ep03-custom-table-script.md) |
+| 10:26 | Bonus: Microsoft Sentinel 101 | [video series](../video-series.md) |
+| 12:11 | Ep04 The Logic App that sends the CSV in | [script](ep04-logic-app-ingest-script.md) |
+| 15:32 | Ep05 The detection rule | [script](ep05-detection-rule-script.md) |
+| 18:19 | Ep06 Automation rule and playbook | [script](ep06-playbook-script.md) |
+| 21:39 | Ep07a The SOAR box: TheHive and Shuffle | [script](ep07a-soar-box-script.md) |
+| 24:52 | Ep07b Sentinel to TheHive, and back | [script](ep07b-sentinel-to-thehive-script.md) |
+| 27:24 | Ep08 PII exposure with severity ranges | [script](ep08-pii-exposure-script.md) |
+| 31:19 | Why this playbook works: learn by doing | [README: why a home lab](../../README.md#why-a-home-lab-and-why-hands-on) |
 
 ## What you build
 
@@ -29,7 +31,7 @@ Every episode, from the prerequisites to the PII use case, back to back. Each ep
 4. A detection rule that raises an incident on its own
 5. A playbook that enriches the incident and raises its severity
 6. TheHive and Shuffle on one small Azure VM
-7. Sentinel incidents that become TheHive cases, and closes that sync back
+7. Sentinel incidents that become TheHive cases, with closures synced back to Sentinel
 8. A second use case: PII exposure with severity ranges
 
 Next: the full brute-force dry run, end to end, then cleanup ([step 6](../06-dry-run-and-cleanup.md)).
