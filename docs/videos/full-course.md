@@ -1,7 +1,7 @@
 # Full course: all parts in one video
 
 > CISSP Coffee Shot, Sentinel + SOAR learning lab. Learning lab, synthetic data only. About 32 minutes.
-> Watch on the [CISSP Coffee Shot YouTube channel](https://www.youtube.com/@CISSP-COFFEE-SHOT). The direct video link is added here once it is published.
+> ▶ **Watch:** [https://youtu.be/JT4phZDic5Q](https://youtu.be/JT4phZDic5Q) · 📺 Playlist: [Microsoft Sentinel for Beginners (Sentinel 101)](https://www.youtube.com/playlist?list=PLYyAEoIo5XUE) · [CISSP Coffee Shot channel](https://www.youtube.com/@CISSP-COFFEE-SHOT)
 
 It opens with why a home lab and hands-on learning help, then plays every episode, from the prerequisites to the PII use case, back to back, and closes with how to learn by doing. Each episode ends with its own "Next" card, which leads into the next chapter. The Bonus (Microsoft Sentinel 101) plays after Episode 03, right before the Logic App, so the brute-force story runs in order.
 
@@ -33,5 +33,7 @@ It opens with why a home lab and hands-on learning help, then plays every episod
 6. TheHive and Shuffle on one small Azure VM
 7. Sentinel incidents that become TheHive cases, with closures synced back to Sentinel
 8. A second use case: PII exposure with severity ranges
+
+How each piece links, from the CSV to TheHive: [csv-to-thehive.md](../csv-to-thehive.md)
 
 Next: the full brute-force dry run, end to end, then cleanup ([step 6](../06-dry-run-and-cleanup.md)).
