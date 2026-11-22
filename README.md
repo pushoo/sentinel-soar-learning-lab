@@ -72,11 +72,28 @@ flowchart LR
 
 More diagrams (sequence of one incident, where each piece runs): [docs/architecture.md](docs/architecture.md)
 
+### From CSV to TheHive: how every piece links
+
+**[docs/csv-to-thehive.md](docs/csv-to-thehive.md)** follows one row of `signins.csv` through all 15 hops, and shows
+the URL, name, ID or tag that links each piece to the next:
+
+`signins.csv` → Logic App trigger URL → `ingestionUrl` (DCR + stream `Custom-SignInDemo_CL`) → table `SignInDemo_CL`
+→ analytics rule → incident + entities → automation rule → playbook (severity High, `auto-enriched`)
+→ Shuffle polls `status eq 'New'` → TheHive case tagged `sentinel-<N>` → analyst closes → Shuffle closes the incident.
+
+It also has a **field mapping** that takes one data element (the attacker IP) through CSV → Logic App → Sentinel →
+Shuffle → TheHive, with an XSOAR column for comparison, and ends with a check for each link, so when something
+doesn't show up you know which hop broke.
+
 ---
 
 ## Video series
 
-**Full course, all parts in one video (32 min):** on the [CISSP Coffee Shot YouTube channel](https://www.youtube.com/@CISSP-COFFEE-SHOT). Chapters and scripts: [docs/videos/full-course.md](docs/videos/full-course.md)
+[![Watch the full course on YouTube](https://img.youtube.com/vi/JT4phZDic5Q/hqdefault.jpg)](https://youtu.be/JT4phZDic5Q)
+
+- ▶ **Full course, all parts in one video (32 min):** [https://youtu.be/JT4phZDic5Q](https://youtu.be/JT4phZDic5Q). Chapters and scripts: [docs/videos/full-course.md](docs/videos/full-course.md)
+- 📺 **Playlist, Microsoft Sentinel for Beginners (Sentinel 101):** [https://www.youtube.com/playlist?list=PLYyAEoIo5XUE](https://www.youtube.com/playlist?list=PLYyAEoIo5XUE). Ten short episodes plus the full course
+- 🔔 **Channel:** [CISSP Coffee Shot](https://www.youtube.com/@CISSP-COFFEE-SHOT)
 
 | Episode | Title | Guide |
 |---|---|---|
@@ -86,7 +103,7 @@ More diagrams (sequence of one incident, where each piece runs): [docs/architect
 | 3 | The custom table and its transform | [script](docs/videos/ep03-custom-table-script.md) |
 | 4 | The Logic App that sends the CSV in | [docs/02-ingest-logic-app.md](docs/02-ingest-logic-app.md) · [script](docs/videos/ep04-logic-app-ingest-script.md) |
 | 5 | The detection rule: query in, incident out | [docs/03-detections.md](docs/03-detections.md) · [script](docs/videos/ep05-detection-rule-script.md) |
-| Bonus | Microsoft Sentinel 101, by example | [docs/video-series.md](docs/video-series.md) |
+| Bonus | Microsoft Sentinel 101, by example | [playlist](https://www.youtube.com/playlist?list=PLYyAEoIo5XUE) · [docs/video-series.md](docs/video-series.md) |
 | 6 | The playbook: the incident starts a response by itself | [docs/04-playbooks.md](docs/04-playbooks.md) · [script](docs/videos/ep06-playbook-script.md) |
 | 7a | The SOAR box: one VM with TheHive and Shuffle | [docs/05-shuffle-thehive.md](docs/05-shuffle-thehive.md) · [script](docs/videos/ep07a-soar-box-script.md) |
 | 7b | Sentinel to TheHive, and back | [docs/05-shuffle-thehive.md](docs/05-shuffle-thehive.md) · [script](docs/videos/ep07b-sentinel-to-thehive-script.md) |
@@ -108,6 +125,7 @@ Full shot lists: [docs/video-series.md](docs/video-series.md)
 | 4 | [Playbooks and automation rules](docs/04-playbooks.md) |
 | 5 | [Shuffle + TheHive](docs/05-shuffle-thehive.md) |
 | 6 | [Dry run, recording checklist and cleanup](docs/06-dry-run-and-cleanup.md) |
+| Map | [From CSV to TheHive: how every piece links](docs/csv-to-thehive.md) |
 
 ## Repo map
 
@@ -120,7 +138,7 @@ sentinel/watchlists/    Watchlist used when you have no threat-intel API key
 logic-apps/             Logic App workflow definitions (paste into Code view)
 soar/                   Shuffle + TheHive install scripts, memory caps, API request templates
 scripts/                Prerequisite checker
-docs/                   Step-by-step guides, architecture, video scripts
+docs/                   Step-by-step guides, architecture, CSV-to-TheHive map, video scripts
 ```
 
 ## Quick start
