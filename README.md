@@ -20,6 +20,21 @@ Two use cases are included:
 
 ---
 
+## Why a home lab, and why hands-on
+
+Reading about a SOC is not the same as running one. This lab is built so you learn by doing:
+
+- **Watch logs become alerts.** You send the data in, write the rule and see the incident open. You build every handoff a real alert goes through.
+- **Learn the most when it breaks.** Every step has a visible result, so when something does not show up, you know which step to check.
+- **Know the answer before you start.** The synthetic data has a fixed mix, so the generators tell you what to expect and you can check your own work.
+- **Mistakes are safe and cheap.** A lab tenant, synthetic data, free tiers and trial credit. Break it, fix it, run it again.
+- **Rebuild it until it sticks.** Every script and query is in this repo, so you can tear the lab down and build it again from memory.
+- **It is proof.** Hiring managers ask what you have built. Your lab, your fork of this repo and your notes answer that. The skills map to CISSP Domain 7, Security Operations.
+
+How to use it: watch an episode, then build that part yourself before you move on.
+
+---
+
 ## Architecture
 
 ```mermaid
@@ -61,7 +76,7 @@ More diagrams (sequence of one incident, where each piece runs): [docs/architect
 
 ## Video series
 
-**Full course, all parts in one video (31 min):** on the [CISSP Coffee Shot YouTube channel](https://www.youtube.com/@CISSP-COFFEE-SHOT). Chapters and scripts: [docs/videos/full-course.md](docs/videos/full-course.md)
+**Full course, all parts in one video (32 min):** on the [CISSP Coffee Shot YouTube channel](https://www.youtube.com/@CISSP-COFFEE-SHOT). Chapters and scripts: [docs/videos/full-course.md](docs/videos/full-course.md)
 
 | Episode | Title | Guide |
 |---|---|---|
