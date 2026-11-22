@@ -37,6 +37,8 @@ flowchart LR
   SH -->|close incident| INC
 ```
 
+Every link between these boxes (the URL, name, ID or tag each piece looks for): [csv-to-thehive.md](csv-to-thehive.md)
+
 ## 2. One incident, step by step (use case 1)
 
 ```mermaid
