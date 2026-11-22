@@ -30,6 +30,20 @@ Script and recording plan: [videos/ep05-detection-rule-script.md](videos/ep05-de
 
 Collect, detect, investigate, respond, explained with one brute-force story.
 
+Watch the **Sentinel 101** playlist: [https://www.youtube.com/playlist?list=PLYyAEoIo5XUE](https://www.youtube.com/playlist?list=PLYyAEoIo5XUE)
+
+1. [Ep01 What is Microsoft Sentinel? SIEM explained](https://youtu.be/bky22YoXBSE)
+2. [Ep02 Log Analytics workspace and Sentinel pricing](https://youtu.be/Zn8vIYr_MZI)
+3. [Ep03 Connect data: Content hub and data connectors](https://youtu.be/1DaMubbs-4Q)
+4. [Ep04 KQL for beginners: catch a brute-force attack](https://youtu.be/GHgq_vHCI54)
+5. [Ep05 Build your first detection rule](https://youtu.be/yIxAG7yS1I4)
+6. [Ep06 Investigate an incident step by step](https://youtu.be/28lvzVzgyEM)
+7. [Ep07 Automation rules vs playbooks vs workbooks](https://youtu.be/HNaWbUkwQTg)
+8. [Ep08 Build your first playbook (SOAR)](https://youtu.be/SYzhfloBA58)
+9. [Ep09 Build a workbook dashboard with KQL](https://youtu.be/qkf5jS9THj4)
+10. [Ep10 What's next for Sentinel, plus lab cleanup](https://youtu.be/slo-I0ywUzY)
+11. [Full course: Microsoft Sentinel SIEM and SOAR, free SOC lab (32 min)](https://youtu.be/JT4phZDic5Q)
+
 ## Later episodes (split into short parts when recorded)
 
 ### Brute force, end to end
