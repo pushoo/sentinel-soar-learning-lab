@@ -126,15 +126,15 @@ After Sentinel 101, three short beginner series go deeper into each tool in this
 
 | Episode | Title | Watch | Publishes |
 |---|---|---|---|
-| 01 | What Is a Logic App? Azure Workflows Explained | [youtu.be/-9bD68MqeQs](https://youtu.be/-9bD68MqeQs) | Nov 23 |
-| 02 | Consumption vs Standard: Logic Apps Pricing Explained | [youtu.be/Ln6rW_m0Ggw](https://youtu.be/Ln6rW_m0Ggw) | Nov 23 |
-| 03 | Logic App Triggers: HTTP Request, Schedule & Events | [youtu.be/RFvRGaJX4UA](https://youtu.be/RFvRGaJX4UA) | Nov 23 |
-| 04 | Logic App Actions in the Designer: Compose, Filter, Select, HTTP | [youtu.be/WAFyo8oDK1U](https://youtu.be/WAFyo8oDK1U) | Nov 24 |
-| 05 | Logic App Expressions, Dynamic Content & Code View | [youtu.be/3ad4IbAdCI0](https://youtu.be/3ad4IbAdCI0) | Nov 24 |
-| 06 | Logic App Managed Identity: Connections Without Passwords | [youtu.be/DWWMfny69Bc](https://youtu.be/DWWMfny69Bc) | Nov 24 |
-| 07 | Logic App Run History: Debug & Resubmit a Run | [youtu.be/_y_UQ833kfM](https://youtu.be/_y_UQ833kfM) | Nov 25 |
-| 08 | Logic Apps as Microsoft Sentinel Playbooks (SOAR) | [youtu.be/qM_lrt4LsM0](https://youtu.be/qM_lrt4LsM0) | Nov 25 |
-| 09 | Logic Apps Monitoring, Cost & Lab Clean-Up | [youtu.be/YCQc-0YsdE0](https://youtu.be/YCQc-0YsdE0) | Nov 25 |
+| 01 | What Is a Logic App? Azure Workflows Explained | [youtu.be/dQnlrZtfzyk](https://youtu.be/dQnlrZtfzyk) | Nov 23 |
+| 02 | Consumption vs Standard: Logic Apps Pricing Explained | [youtu.be/p0GgjMBDTDg](https://youtu.be/p0GgjMBDTDg) | Nov 23 |
+| 03 | Logic App Triggers: HTTP Request, Schedule & Events | [youtu.be/4r1blb4qmwE](https://youtu.be/4r1blb4qmwE) | Nov 23 |
+| 04 | Logic App Actions in the Designer: Compose, Filter, Select, HTTP | [youtu.be/KMZSv3dlmFU](https://youtu.be/KMZSv3dlmFU) | Nov 24 |
+| 05 | Logic App Expressions, Dynamic Content & Code View | [youtu.be/sCDQZ-auQZE](https://youtu.be/sCDQZ-auQZE) | Nov 24 |
+| 06 | Logic App Managed Identity: Connections Without Passwords | [youtu.be/nKuM5ibAIxA](https://youtu.be/nKuM5ibAIxA) | Nov 24 |
+| 07 | Logic App Run History: Debug & Resubmit a Run | [youtu.be/A1IUFiYpXes](https://youtu.be/A1IUFiYpXes) | Nov 25 |
+| 08 | Logic Apps as Microsoft Sentinel Playbooks (SOAR) | [youtu.be/6OSUxf4hVsM](https://youtu.be/6OSUxf4hVsM) | Nov 25 |
+| 09 | Logic Apps Monitoring, Cost & Lab Clean-Up | [youtu.be/MfAIVEKmO0w](https://youtu.be/MfAIVEKmO0w) | Nov 25 |
 
 </details>
 
@@ -143,14 +143,14 @@ After Sentinel 101, three short beginner series go deeper into each tool in this
 
 | Episode | Title | Watch | Publishes |
 |---|---|---|---|
-| 01 | What Is SOAR? Shuffle Open-Source SOAR Explained | [youtu.be/SFkD_4vsqYg](https://youtu.be/SFkD_4vsqYg) | Nov 26 |
-| 02 | Where Shuffle Runs: Docker, Ports & Locking It Down | [youtu.be/GYyPTeFBCHQ](https://youtu.be/GYyPTeFBCHQ) | Nov 26 |
-| 03 | A Tour of Shuffle: Workflows, Apps & Runs | [youtu.be/Ts-khLaROts](https://youtu.be/Ts-khLaROts) | Nov 26 |
-| 04 | Shuffle Apps & Authentication: Keep Secrets Out of Workflows | [youtu.be/QFlSfaLyxgo](https://youtu.be/QFlSfaLyxgo) | Nov 27 |
-| 05 | Shuffle Workflow Building Blocks: Triggers, Actions, Conditions | [youtu.be/vkeKDD3_UnM](https://youtu.be/vkeKDD3_UnM) | Nov 27 |
-| 06 | Shuffle Workflow: Microsoft Sentinel to TheHive | [youtu.be/yBDxK1RcWn4](https://youtu.be/yBDxK1RcWn4) | Nov 27 |
-| 07 | Debugging Shuffle Workflows: Reading Runs | [youtu.be/tytNKMVbIWw](https://youtu.be/tytNKMVbIWw) | Nov 28 |
-| 08 | Shuffle Workflow: Close the Loop Back to Microsoft Sentinel | [youtu.be/dAvBRtci3_I](https://youtu.be/dAvBRtci3_I) | Nov 28 |
+| 01 | What Is SOAR? Shuffle Open-Source SOAR Explained | [youtu.be/1i_kBLCBN74](https://youtu.be/1i_kBLCBN74) | Nov 26 |
+| 02 | Where Shuffle Runs: Docker, Ports & Locking It Down | [youtu.be/oA4Yeb_RwYk](https://youtu.be/oA4Yeb_RwYk) | Nov 26 |
+| 03 | A Tour of Shuffle: Workflows, Apps & Runs | [youtu.be/VYMlvE5P8Hg](https://youtu.be/VYMlvE5P8Hg) | Nov 26 |
+| 04 | Shuffle Apps & Authentication: Keep Secrets Out of Workflows | [youtu.be/9jWX_MorsbU](https://youtu.be/9jWX_MorsbU) | Nov 27 |
+| 05 | Shuffle Workflow Building Blocks: Triggers, Actions, Conditions | [youtu.be/NFdrzq62U2I](https://youtu.be/NFdrzq62U2I) | Nov 27 |
+| 06 | Shuffle Workflow: Microsoft Sentinel to TheHive | [youtu.be/ZhFhudBeHYw](https://youtu.be/ZhFhudBeHYw) | Nov 27 |
+| 07 | Debugging Shuffle Workflows: Reading Runs | [youtu.be/au3TkR_2rME](https://youtu.be/au3TkR_2rME) | Nov 28 |
+| 08 | Shuffle Workflow: Close the Loop Back to Microsoft Sentinel | [youtu.be/-Glcdm8jkMI](https://youtu.be/-Glcdm8jkMI) | Nov 28 |
 | 09 | Shuffle vs Cortex XSOAR: What Maps to What | [youtu.be/9c0ObkdcCuU](https://youtu.be/9c0ObkdcCuU) | Nov 28 |
 
 </details>
@@ -161,12 +161,12 @@ After Sentinel 101, three short beginner series go deeper into each tool in this
 | Episode | Title | Watch | Publishes |
 |---|---|---|---|
 | 01 | What Is TheHive? Case Management for SOC Analysts | [youtu.be/aeD8neImKjI](https://youtu.be/aeD8neImKjI) | Nov 29 |
-| 02 | TheHive Organisations, Users & Roles | [youtu.be/RkBP9jSkUYc](https://youtu.be/RkBP9jSkUYc) | Nov 29 |
+| 02 | TheHive Organisations, Users & Roles | [youtu.be/M0yQtQj4jRc](https://youtu.be/M0yQtQj4jRc) | Nov 29 |
 | 03 | TheHive Alerts vs Cases: What's the Difference? | [youtu.be/y5EJ-JRB7Hc](https://youtu.be/y5EJ-JRB7Hc) | Nov 29 |
-| 04 | Anatomy of a TheHive Case: Observables, Tasks, TTPs & Timeline | [youtu.be/NSawQ7fLSF0](https://youtu.be/NSawQ7fLSF0) | Nov 30 |
-| 05 | Working a TheHive Case as a SOC Analyst | [youtu.be/-MHJr1gF7Fo](https://youtu.be/-MHJr1gF7Fo) | Nov 30 |
-| 06 | Closing a TheHive Case with a Verdict (True Positive) | [youtu.be/m0q79UzwoGc](https://youtu.be/m0q79UzwoGc) | Nov 30 |
-| 07 | TheHive Timelines & Dashboards | [youtu.be/2up9sC-6SpE](https://youtu.be/2up9sC-6SpE) | Dec 1 |
+| 04 | Anatomy of a TheHive Case: Observables, Tasks, TTPs & Timeline | [youtu.be/bgHh1iAGdqw](https://youtu.be/bgHh1iAGdqw) | Nov 30 |
+| 05 | Working a TheHive Case as a SOC Analyst | [youtu.be/rxlVnjg9c5U](https://youtu.be/rxlVnjg9c5U) | Nov 30 |
+| 06 | Closing a TheHive Case with a Verdict (True Positive) | [youtu.be/B4AqULFARwc](https://youtu.be/B4AqULFARwc) | Nov 30 |
+| 07 | TheHive Timelines & Dashboards | [youtu.be/ocHoAvH_dcw](https://youtu.be/ocHoAvH_dcw) | Dec 1 |
 | 08 | TheHive vs Cortex XSOAR War Room | [youtu.be/tmMaiMG_7tM](https://youtu.be/tmMaiMG_7tM) | Dec 1 |
 
 </details>
